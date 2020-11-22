@@ -1,7 +1,7 @@
 /*
  * @Author: your name
  * @Date: 2020-11-22 01:48:02
- * @LastEditTime: 2020-11-22 10:48:23
+ * @LastEditTime: 2020-11-22 11:35:30
  * @LastEditors: Please set LastEditors
  * @Description: In User Settings Edit
  * @FilePath: \my-blog\pages\index.js
@@ -14,10 +14,6 @@ export default function Home() {
       <main className={styles.main}>
         <div>home</div>
       </main>
-
-      <footer className={styles.footer}>
-        <p>页脚</p>
-      </footer>
     </div>
   )
 }
