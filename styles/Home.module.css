@@ -3,12 +3,22 @@
   padding: 0 0.5rem;
   display: flex;
   flex-direction: column;
-  justify-content: center;
   align-items: center;
 }
 
+.link {
+  color: #fafafa;
+}
+
 .header {
-  
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
+  padding: 10px;
+  width: 100%;
+  height: 60px;
+  background: #343434;
 }
 
 .main {
