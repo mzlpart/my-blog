@@ -19,7 +19,7 @@ export default () => (
           <a>Mzl</a>'s Blog</p>
     </Link>
     <div className="login-container">
-      <Button onClick={() => alert(1)}>登录</Button>
+      <Button>登录</Button>
       <Button>注册</Button>
     </div>
   </div>

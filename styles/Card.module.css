@@ -1,0 +1,19 @@
+/* 文章相关样式 */
+.article-card {
+    display: flex;
+}
+
+.article-cardT-title {
+    display: flex;
+    justify-content: space-between;
+}
+  
+.article-card-time p{
+    text-align: center;
+    border-top: 1px solid;
+    border-bottom: 1px solid;
+}
+
+.article-card-time ul li{
+    margin-right: 10px;
+}

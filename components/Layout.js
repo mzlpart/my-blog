@@ -3,7 +3,7 @@
  * @Date: 2020-11-22 10:51:22
  * @LastEditTime: 2020-11-22 12:18:51
  * @LastEditors: Please set LastEditors
- * @Description: 公共布局
+ * @Description: 公共头部提取
  * @FilePath: \my-blog\components\Layout.js
  */
 
@@ -13,6 +13,6 @@ import Header from "../components/Header";
 export default ({ children }) => (
   <div className="container">
     <Header></Header>
-    <div>{children}</div>
+    <div className="main-body">{children}</div>
   </div>
 );
