@@ -15,7 +15,8 @@ import { Button } from "antd";
 export default () => (
   <div className="header">
     <Link href="/">
-      <a className="link">首页</a>
+      <p className="link">
+          <a>Mzl</a>'s Blog</p>
     </Link>
     <div className="login-container">
       <Button onClick={() => alert(1)}>登录</Button>

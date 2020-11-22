@@ -15,7 +15,7 @@ function MyApp({ Component, pageProps }) {
   return (
     <>
       <Head>
-        <title>mzl part</title>
+        <title>成长点滴</title>
         <link rel="icon" href="/favicon.ico" />
       </Head>
       <Layout>
