@@ -6,6 +6,7 @@
     justify-content: space-between;
   }
   &-time {
+    width: 60px;
     p {
       text-align: center;
       border-top: 1px solid;
@@ -14,12 +15,25 @@
     ul li {
       margin-right: 10px;
     }
+    &-end {
+      padding: 10px;
+    }
+  }
+  &-end {
+    margin-top: -1px!important;
+    .ant-card-body {
+      padding: 10px;
+    }
+    .article-content-popicon {
+      top: 15px!important;
+    }
   }
   &-main {
     width: 100%;
     margin: 4px 0 30px 40px;
   }
   &-container {
+    position: relative;
     display: flex;
     justify-content: space-between;
     padding: 10px;
@@ -40,6 +54,28 @@
           color: #fff;
           box-shadow: 0 0 0 1px #d9d9d9 inset;
         }
+      }
+    }
+    /*文章卡片左侧三角*/
+    .article-content-popicon {
+      position: absolute;
+      top: 10px;
+      left: -9px;
+      width: 0;
+      height: 0;
+      border-top: 6px solid transparent;
+      border-right: 10px solid #f0f0f0;
+      border-bottom: 6px solid transparent;
+      &::after {
+        content: '';
+        position: absolute;
+        top: -5px;
+        left: 1px;
+        width: 0;
+        height: 0;
+        border-top: 5px solid transparent;
+        border-right: 9px solid #fff;
+        border-bottom: 5px solid transparent;
       }
     }
   }

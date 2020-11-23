@@ -1,7 +1,7 @@
 /*
  * @Author: your name
  * @Date: 2020-11-22 01:48:02
- * @LastEditTime: 2020-11-23 20:38:11
+ * @LastEditTime: 2020-11-23 22:50:07
  * @LastEditors: Please set LastEditors
  * @Description: In User Settings Edit
  * @FilePath: \my-blog\pages\index.js
@@ -74,7 +74,7 @@ export default function Home() {
             <ArticleCard
               title=""
               time={1712319824} />
-            <ArticleCard type="end" />
+            <ArticleCard type="End" />
           </Col>
           <Col span={6}></Col>
         </Row>
