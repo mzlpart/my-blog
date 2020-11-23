@@ -9,7 +9,8 @@
 
 import Head from 'next/head';
 import Layout from '../components/Layout';
-import "../styles/globals.css";
+import 'antd/dist/antd.css'; // 先不走按需引入(后期解决)
+import '../styles/globals.css';
 
 function MyApp({ Component, pageProps }) {
   return (

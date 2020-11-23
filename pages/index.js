@@ -16,9 +16,6 @@ import {
   UserOutlined,
   UploadOutlined,
   VideoCameraOutlined,
-  EditOutlined,
-  EllipsisOutlined,
-  SettingOutlined 
 } from '@ant-design/icons';
 import ArticleCard from '../components/article/Card';
 
@@ -67,17 +64,17 @@ export default function Home() {
           <Col span={18}>
             <ArticleCard
               title=""
-              time={1712319824}/>
-              <ArticleCard
+              time={1712319824} />
+            {/* <ArticleCard
               title=""
-              time={1712319824}/>
-              <ArticleCard
+              time={1712319824} />
+            <ArticleCard
               title=""
-              time={1712319824}/>
-              <ArticleCard
+              time={1712319824} />
+            <ArticleCard
               title=""
-              time={1712319824}/>
-            <ArticleCard type="end"/>
+              time={1712319824} />
+            <ArticleCard type="end" /> */}
           </Col>
           <Col span={6}></Col>
         </Row>

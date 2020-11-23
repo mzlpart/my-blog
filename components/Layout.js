@@ -7,7 +7,7 @@
  * @FilePath: \my-blog\components\Layout.js
  */
 
-import "../styles/Home.module.css";
+import "../styles/Layout.module.less";
 import Header from "../components/Header";
 
 export default ({ children }) => (

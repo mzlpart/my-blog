@@ -1,5 +1,16 @@
-import { Popover } from 'antd';
-import '../../styles/Card.module.css';
+import { Card, Avatar } from 'antd';
+import { EditOutlined, EllipsisOutlined, SettingOutlined } from '@ant-design/icons';
+import IfComp from 'if-comp';
+import '../../styles/Card.module.less';
+/**
+ * <IfComp 
+      expression={true}
+      trueComp={<h3>render true component</h3>}
+      falseComp={<h3>render false component</h3>}
+    />
+ */
+const { Meta } = Card;
+
 export default () => (
     <div className="article-card">
         <div className="article-card-time">
@@ -15,20 +26,22 @@ export default () => (
                 <li></li>
             </ul>
         </div>
-        <Popover
-            placement="rightTop"
-            title={
-                <div className="article-cardT-title">
-                    <div>文章标题</div>
-                    <div>观看数</div>
-                </div>
+        <Card
+            style={{ width: '100%' }}
+            cover={
+                <div>卡片封面</div>
             }
-            visible={true}
-            content={
-                <div style={{ width: 600, height: 160 }}>
-                    333
-            </div>
-            }
-        />
+            actions={[
+                <SettingOutlined key="setting" />,
+                <EditOutlined key="edit" />,
+                <EllipsisOutlined key="ellipsis" />,
+            ]}
+        >
+            <Meta
+                avatar={<Avatar src="https://zos.alipayobjects.com/rmsportal/ODTLcjxAfvqbxHnVXCYX.png" />}
+                title="Card title"
+                description="This is the description"
+            />
+        </Card>
     </div>
 )

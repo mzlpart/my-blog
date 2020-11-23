@@ -7,15 +7,12 @@
  * @FilePath: \blog\next.config.js
  */
 
+const withLess = require('@zeit/next-less');
 const withCss = require('@zeit/next-css');
+const withPlugins = require('next-compose-plugins');
 
-if(typeof require !== 'undefined'){
-    require.extensions['.css']=file=>{}
-}
-
-module.exports = withCss({
-    // cssModules: true,
-    // lessLoaderOptions: {
-    //     javascriptEnabled: true
-    //  }
-})
+module.exports = withPlugins([withLess, withCss], {
+    webpack: (config) => {
+        return config
+    },
+});
