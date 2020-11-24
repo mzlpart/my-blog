@@ -3,14 +3,14 @@ const { defaultHead } = require("next/head");
 /*
  * @Author: your name
  * @Date: 2020-11-22 11:40:54
- * @LastEditTime: 2020-11-22 12:17:14
+ * @LastEditTime: 2020-11-24 23:40:56
  * @LastEditors: Please set LastEditors
  * @Description: In User Settings Edit
  * @FilePath: \blog\components\Header.js
  */
-import { userState, useEffect } from 'react';
 import Link from "next/link";
-import { Button } from "antd";
+import Login from './user/Login';
+import Register from './user/Register';
 
 export default () => (
   <div className="header">
@@ -19,8 +19,8 @@ export default () => (
           <a>Mzl</a>'s Blog</p>
     </Link>
     <div className="login-container">
-      <Button>登录</Button>
-      <Button>注册</Button>
+        <Login/>
+        <Register/>
     </div>
   </div>
 );

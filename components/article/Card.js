@@ -1,7 +1,7 @@
 /*
  * @Author: mzl
  * @Date: 2020-11-23 20:21:23
- * @LastEditTime: 2020-11-24 23:06:28
+ * @LastEditTime: 2020-11-24 23:31:03
  * @LastEditors: Please set LastEditors
  * @Description: In User Settings Edit
  * @FilePath: \blog\components\article\Card.js
@@ -9,11 +9,11 @@
 import IfComp from "if-comp";
 import { Card, Avatar, Badge } from "antd";
 import { EyeOutlined } from "@ant-design/icons";
-import "../styles/Card.module.less";
+import "../../styles/Card.module.less";
 
 import { 
   timeFormat,
-} from '../utils';
+} from '../../utils';
 
 const { Meta } = Card;
 const liList = [1, 2, 3, 4, 5, 6, 7];

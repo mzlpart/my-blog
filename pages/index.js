@@ -1,7 +1,7 @@
 /*
  * @Author: your name
  * @Date: 2020-11-22 01:48:02
- * @LastEditTime: 2020-11-24 23:06:13
+ * @LastEditTime: 2020-11-24 23:30:44
  * @LastEditors: Please set LastEditors
  * @Description: In User Settings Edit
  * @FilePath: \my-blog\pages\index.js
@@ -17,7 +17,7 @@ import {
   UploadOutlined,
   VideoCameraOutlined,
 } from '@ant-design/icons';
-import ArticleCard from '../components/ArticleCard';
+import ArticleCard from '../components/article/Card';
 
 const { Content, Sider } = Layout;
 
