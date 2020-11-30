@@ -1,7 +1,7 @@
 /*
  * @Author: mzl
  * @Date: 2020-11-24 23:23:29
- * @LastEditTime: 2020-11-25 00:37:37
+ * @LastEditTime: 2020-12-01 00:33:42
  * @Description:
  */
 import { Form, Input, Modal, Button, Checkbox } from "antd";
@@ -26,10 +26,7 @@ export default (props) => {
 
   function handleOk() {
     setLoading(true);
-    setTimeout(() => {
-      setVisible(false);
-      setLoading(false);
-    }, 3000);
+    // TODO: 用户登录接口
   }
 
   function handleCancel() {
