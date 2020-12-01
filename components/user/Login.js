@@ -1,11 +1,13 @@
 /*
  * @Author: mzl
  * @Date: 2020-11-24 23:23:29
- * @LastEditTime: 2020-12-01 00:33:42
+ * @LastEditTime: 2020-12-01 23:58:49
  * @Description:
  */
 import { Form, Input, Modal, Button, Checkbox } from "antd";
 import { useState, useEffect } from "react";
+
+import axios from 'axios';
 
 const layout = {
   labelCol: { span: 8 },
@@ -19,6 +21,8 @@ const tailLayout = {
 export default (props) => {
   let [loading, setLoading] = useState(false);
   let [visible, setVisible] = useState(false);
+  // let [userName, setUserName] = useState('');
+  // let [password, setPassword] = useState('');
 
   function showModal() {
     setVisible(true);
@@ -27,6 +31,7 @@ export default (props) => {
   function handleOk() {
     setLoading(true);
     // TODO: 用户登录接口
+    
   }
 
   function handleCancel() {
@@ -34,9 +39,13 @@ export default (props) => {
   }
 
   const onFinish = (values) => {
-    console.log("Success:", values);
+    axios({
+      method: 'post',
+      url: 'http://localhost:3000/api/user',
+      data: {...values, type: 'save'},
+    });
   };
-
+  
   const onFinishFailed = (errorInfo) => {
     console.log("Failed:", errorInfo);
   };
@@ -48,6 +57,8 @@ export default (props) => {
       </Button>
       <Modal
         visible={visible}
+        centered
+        style={{ top: 20 }}
         title="登录啊，寻思啥呢！？"
         onOk={handleOk}
         onCancel={handleCancel}
@@ -61,7 +72,8 @@ export default (props) => {
           onFinishFailed={onFinishFailed}
         >
           <Form.Item
-            label="Username"
+            // label="Username"
+            // value={userName}
             name="username"
             rules={[{ required: true, message: "Please input your username!" }]}
           >
@@ -69,16 +81,18 @@ export default (props) => {
           </Form.Item>
 
           <Form.Item
-            label="Password"
+            // label="Password"
+            // value={password}
             name="password"
             rules={[{ required: true, message: "Please input your password!" }]}
           >
             <Input.Password />
           </Form.Item>
 
-          <Form.Item {...tailLayout} name="remember" valuePropName="checked">
+          {/* 放到最后做 */}
+          {/* <Form.Item {...tailLayout} name="remember" valuePropName="checked">
             <Checkbox>记住我</Checkbox>
-          </Form.Item>
+          </Form.Item> */}
 
           <Form.Item {...tailLayout}>
             <Button

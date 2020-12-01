@@ -1,7 +1,7 @@
 /*
  * @Author: mzl
  * @Date: 2020-11-30 22:30:28
- * @LastEditTime: 2020-12-01 22:27:18
+ * @LastEditTime: 2020-12-01 23:42:33
  * @Description: 程序入口
  */
 const express = require("express");
@@ -9,11 +9,10 @@ const server = express();
 
 const co = require("co");
 const next = require("next");
-const body = require("body-parser");
+const bodyParser = require("body-parser");
 const mongoose = require("mongoose");
 
 const dev = process.env.NODE_ENV !== "production";
-console.log(dev);
 const app = next({ dev });
 const handle = app.getRequestHandler();
 
@@ -44,7 +43,8 @@ co(function* () {
       () => {
         console.log('数据库连接成功！');
         server.use(AllowCrossDomain);
-        server.use(body.json());
+        server.use(bodyParser.json());
+        server.use(bodyParser.urlencoded({ extended: true }));
         server.use("/api", apiRouter);
         server.get("*", (req, res) => {
           return handle(req, res);
