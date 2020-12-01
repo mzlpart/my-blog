@@ -1,19 +1,20 @@
 /*
  * @Author: mzl
  * @Date: 2020-11-30 22:30:28
- * @LastEditTime: 2020-12-01 00:03:21
+ * @LastEditTime: 2020-12-01 22:27:18
  * @Description: 程序入口
  */
 const express = require("express");
 const server = express();
 
 const co = require("co");
-const Next = require("next");
+const next = require("next");
 const body = require("body-parser");
 const mongoose = require("mongoose");
 
 const dev = process.env.NODE_ENV !== "production";
-const app = Next({ dev });
+console.log(dev);
+const app = next({ dev });
 const handle = app.getRequestHandler();
 
 const apiRouter = require("./backend/routes");
@@ -33,7 +34,7 @@ const AllowCrossDomain = function (req, res, next) {
 
 co(function* () {
   yield app.prepare();
-  console.log(`Connecting to mongo`);
+  console.log('正在连接数据库...');
   mongoose
     .connect("mongodb://localhost:27017/blog", {
       useNewUrlParser: true,
@@ -41,7 +42,7 @@ co(function* () {
     })
     .then(
       () => {
-        console.log('数据库连接成功');
+        console.log('数据库连接成功！');
         server.use(AllowCrossDomain);
         server.use(body.json());
         server.use("/api", apiRouter);
@@ -49,7 +50,7 @@ co(function* () {
           return handle(req, res);
         });
         server.listen(PORT);
-        // console.log(`Listening on ${PORT},open: 127.0.0.1:${PORT}`);
+        console.log(`Listening on ${PORT},open: 127.0.0.1:${PORT}`);
       },
       (err) => console.log(err)
     );

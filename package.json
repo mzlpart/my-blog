@@ -5,7 +5,7 @@
   "scripts": {
     "dev": "node app",
     "build": "next build",
-    "start": "next start"
+    "start": "cross-env NODE_ENV=production node app.js"
   },
   "dependencies": {
     "@zeit/next-css": "^1.0.1",
@@ -23,5 +23,8 @@
     "next-compose-plugins": "^2.2.1",
     "react": "17.0.1",
     "react-dom": "17.0.1"
+  },
+  "devDependencies": {
+    "cross-env": "^7.0.2"
   }
 }
