@@ -1,7 +1,7 @@
 /*
  * @Author: mzl
  * @Date: 2020-12-01 00:05:53
- * @LastEditTime: 2020-12-02 00:22:41
+ * @LastEditTime: 2020-12-02 23:30:50
  * @Description: 操作User表
  */
 
@@ -10,17 +10,10 @@ const userSchema = require('../schemas/User');
 
 let User = mongoose.model('User', userSchema);
 
-let userAction = {
-    doSave: (params) => {
+let userModel = {
+    doSave: (params, callback) => {
         let user = new User(params);
-        user.save(err => {
-            if (err) {
-                console.log(err);
-            } else {
-                // 返回给前台数据
-                console.log('保存成功');
-            }
-        });
+        user.save(err => callback(err));
     },
     doDel: (params) => {
         console.log('用户删除');
@@ -33,4 +26,4 @@ let userAction = {
     }
 };
 
-module.exports = userAction;
+module.exports = userModel;

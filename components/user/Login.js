@@ -1,13 +1,13 @@
 /*
  * @Author: mzl
  * @Date: 2020-11-24 23:23:29
- * @LastEditTime: 2020-12-01 23:58:49
+ * @LastEditTime: 2020-12-02 23:34:46
  * @Description:
  */
 import { Form, Input, Modal, Button, Checkbox } from "antd";
 import { useState, useEffect } from "react";
 
-import axios from 'axios';
+import axios from "axios";
 
 const layout = {
   labelCol: { span: 8 },
@@ -31,21 +31,26 @@ export default (props) => {
   function handleOk() {
     setLoading(true);
     // TODO: 用户登录接口
-    
   }
 
   function handleCancel() {
     setVisible(false);
   }
 
-  const onFinish = (values) => {
+  const onFinish = (data) => {
     axios({
-      method: 'post',
-      url: 'http://localhost:3000/api/user',
-      data: {...values, type: 'save'},
-    });
+      method: "post",
+      url: "http://localhost:3000/api/user/save",
+      data,
+    })
+      .then(res => {
+        console.log('mm-res', res);
+      })
+      .catch(error => {
+        console.log(error);
+      });
   };
-  
+
   const onFinishFailed = (errorInfo) => {
     console.log("Failed:", errorInfo);
   };
