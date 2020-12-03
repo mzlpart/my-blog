@@ -4,8 +4,9 @@
  * @LastEditTime: 2020-12-02 23:34:46
  * @Description:
  */
+
+import { useState, useEffect, useContext } from "react";
 import { Form, Input, Modal, Button, message, Checkbox } from "antd";
-import { useState, useEffect } from "react";
 
 import { postAxios } from '../../utils';
 
@@ -19,6 +20,8 @@ const tailLayout = {
 };
 
 export default (props) => {
+  console.log('mm-props', props)
+  // let value = useContext(MyContext);
   let [loading, setLoading] = useState(false);
   let [visible, setVisible] = useState(false);
 

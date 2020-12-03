@@ -6,7 +6,7 @@
  * @Description: 处理公共逻辑：布局、全局状态、国际化等
  * @FilePath: \my-blog\pages\_app.js
  */
-
+import { createContext, useReducer } from 'react';
 import Head from 'next/head';
 import Layout from '../components/Layout';
 import moment from 'moment';
@@ -26,16 +26,45 @@ message.config({
   // prefixCls: 'my-message',
 });
 
+const UserContext = createContext();
+
 function MyApp({ Component, pageProps }) {
+
+  const initialState = { username: '', password: '' };
+
+  function reducer(state, action) {
+    switch (action.type) {
+      case 'login':
+        return {
+          username: state.username,
+          password: state.password
+        };
+      default:
+        throw new Error();
+    }
+  }
+
+  const [state, dispatch] = useReducer(reducer, initialState);
+
   return (
     <>
       <Head>
         <title>成长点滴</title>
         <link rel="icon" href="/favicon.ico" />
       </Head>
-      <Layout>
-        <Component {...pageProps} />
-      </Layout>
+      {/* <UserContext.Provider
+        user={
+          {
+            username: state.username,
+            password: state.password
+          }
+        }
+        setUser={dispatch}
+      > */}
+        <Layout>
+          <Component {...pageProps} />
+        </Layout>
+      {/* </UserContext.Provider> */}
     </>
   );
 }
