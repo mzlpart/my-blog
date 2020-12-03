@@ -16,7 +16,7 @@ router.post("/user/save", (req, res, next) => {
       if (err) {
         res.json({ status: 500, data: '请求失败', err})
       } else {
-        res.json({ status: 200, data: '请求成功'})
+        res.json({ status: 200, data: '保存成功'})
       }
     });
   }

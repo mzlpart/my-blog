@@ -9,11 +9,22 @@
 
 import Head from 'next/head';
 import Layout from '../components/Layout';
-import 'antd/dist/antd.css'; // 先不走按需引入(后期解决)
 import moment from 'moment';
+import { message } from 'antd';
+
+import 'antd/dist/antd.css'; // 先不走按需引入(后期解决)
 import '../styles/globals.css';
 
 moment.locale('zh-cn');
+
+// 统一消息提示配置
+message.config({
+  top: 200,
+  duration: 1,
+  // maxCount: 3,
+  // rtl: true,
+  // prefixCls: 'my-message',
+});
 
 function MyApp({ Component, pageProps }) {
   return (

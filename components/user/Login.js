@@ -4,10 +4,10 @@
  * @LastEditTime: 2020-12-02 23:34:46
  * @Description:
  */
-import { Form, Input, Modal, Button, Checkbox } from "antd";
+import { Form, Input, Modal, Button, message, Checkbox } from "antd";
 import { useState, useEffect } from "react";
 
-import axios from "axios";
+import { postAxios } from '../../utils';
 
 const layout = {
   labelCol: { span: 8 },
@@ -21,8 +21,6 @@ const tailLayout = {
 export default (props) => {
   let [loading, setLoading] = useState(false);
   let [visible, setVisible] = useState(false);
-  // let [userName, setUserName] = useState('');
-  // let [password, setPassword] = useState('');
 
   function showModal() {
     setVisible(true);
@@ -30,7 +28,6 @@ export default (props) => {
 
   function handleOk() {
     setLoading(true);
-    // TODO: 用户登录接口
   }
 
   function handleCancel() {
@@ -38,16 +35,19 @@ export default (props) => {
   }
 
   const onFinish = (data) => {
-    axios({
-      method: "post",
-      url: "http://localhost:3000/api/user/save",
-      data,
-    })
+    postAxios({url: "/user/save", data})
       .then(res => {
-        console.log('mm-res', res);
+        let { status, data } = res;
+        if(status === 200) {
+          setLoading(false);
+          setVisible(false);
+          message.success(data);
+        }
       })
       .catch(error => {
-        console.log(error);
+        setLoading(false);
+        setVisible(false);
+        message.error(error);
       });
   };
 
