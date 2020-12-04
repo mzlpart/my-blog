@@ -10,7 +10,7 @@ const { defaultHead } = require("next/head");
  */
 import Link from "next/link";
 import Login from './user/Login';
-import Register from './user/Register';
+import WriteArticle from './user/WriteArticle';
 
 export default () => (
   <div className="header">
@@ -19,8 +19,8 @@ export default () => (
           <a>Mzl</a>'s Blog</p>
     </Link>
     <div className="login-container">
+        <WriteArticle/>
         <Login/>
-        <Register/>
     </div>
   </div>
 );

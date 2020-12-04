@@ -60,7 +60,7 @@ export default (props) => {
 
   return (
     <>
-      <Button type="primary" onClick={showModal}>
+      <Button onClick={showModal}>
         登录
       </Button>
       <Modal

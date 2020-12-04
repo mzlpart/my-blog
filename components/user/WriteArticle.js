@@ -8,11 +8,9 @@ import { Button, message } from "antd";
 
 export default (props) => {
 
-   function success() {
-      message.success('wocao!!', 1);
-   }
-
    return (
-      <Button onClick={success}>注册</Button>
+      <Button
+         type="primary"
+      >写文章</Button>
    );
 }
