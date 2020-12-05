@@ -1,7 +1,7 @@
 /*
  * @Author: mzl
  * @Date: 2020-11-24 23:23:29
- * @LastEditTime: 2020-12-06 03:17:45
+ * @LastEditTime: 2020-12-06 03:22:37
  * @Description:
  */
 
@@ -61,7 +61,7 @@ export default (props) => {
   };
 
   const onFinishFailed = (errorInfo) => {
-    console.log("Failed:", errorInfo);
+    setLoading(false);
   };
 
   return (
