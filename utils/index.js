@@ -1,7 +1,7 @@
 /*
  * @Author: mzl
  * @Date: 2020-11-23 21:15:45
- * @LastEditTime: 2020-11-23 23:08:08
+ * @LastEditTime: 2020-12-06 02:33:57
  * @Description: 工具类
  */
 
@@ -25,11 +25,16 @@ if( process.env.NODE_ENV === 'production' ) {
     baseURL = 'http://localhost:3000/api';
 }
 
+// 允许携带cookie 后端session用到
+axios.defaults.withCredentials=true;
+
 // 拦截器
-axios.interceptors.response.use((response) => {
-    return response
-}, (error) => {
-    return Promise.reject(error)
+axios.interceptors.response.use(response => {
+    let { status, data } = response;
+    return {...data, status};
+}, ({response}) => {
+    let {status, data}  = response;
+    return Promise.reject({status, ...data});
 })
 
 axios.interceptors.request.use(config => {
@@ -50,7 +55,7 @@ export function getAxios({
         axios.get(url, {
             params,
         }).then(res => {
-            resolve(res.data)
+            resolve(res)
         }).catch(err => {
             reject(err)
         })
@@ -68,7 +73,7 @@ export function postAxios({
             method: 'post',
             data
         }).then(res => {
-            resolve(res.data)
+            resolve(res)
         }).catch(err => {
             reject(err)
         })

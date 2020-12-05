@@ -1,7 +1,7 @@
 /*
  * @Author: mzl
  * @Date: 2020-12-01 00:05:53
- * @LastEditTime: 2020-12-02 23:30:50
+ * @LastEditTime: 2020-12-06 00:25:46
  * @Description: 操作User表
  */
 
@@ -19,7 +19,7 @@ let userModel = {
         console.log('用户删除');
     },
     doFind: (params) => {
-        console.log('用户查询');
+        return User.findOne(params);
     },
     doUpdate: (params) => {
         console.log('用户更新');

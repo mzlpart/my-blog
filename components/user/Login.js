@@ -1,11 +1,11 @@
 /*
  * @Author: mzl
  * @Date: 2020-11-24 23:23:29
- * @LastEditTime: 2020-12-02 23:34:46
+ * @LastEditTime: 2020-12-06 03:17:45
  * @Description:
  */
 
-import { useState, useEffect, useContext } from "react";
+import { useState, useEffect, useContext, useRef } from "react";
 import { Form, Input, Modal, Button, message, Checkbox } from "antd";
 
 import { postAxios } from '../../utils';
@@ -20,10 +20,11 @@ const tailLayout = {
 };
 
 export default (props) => {
-  console.log('mm-props', props)
   // let value = useContext(MyContext);
   let [loading, setLoading] = useState(false);
   let [visible, setVisible] = useState(false);
+
+  let loginInputRef = useRef();
 
   function showModal() {
     setVisible(true);
@@ -37,20 +38,25 @@ export default (props) => {
     setVisible(false);
   }
 
+  function loginAfter({ status, msg }) {
+    setLoading(false);
+    if(status === 200) {
+      setVisible(false);
+      message.success(msg)
+    }
+    if(status === 500) {
+      message.error(msg);
+      loginInputRef.current.focus();
+    }
+  }
+
   const onFinish = (data) => {
-    postAxios({url: "/user/save", data})
+    postAxios({url: "/user/login", data})
       .then(res => {
-        let { status, data } = res;
-        if(status === 200) {
-          setLoading(false);
-          setVisible(false);
-          message.success(data);
-        }
+        loginAfter(res);
       })
       .catch(error => {
-        setLoading(false);
-        setVisible(false);
-        message.error(error);
+        loginAfter(error);
       });
   };
 
@@ -71,6 +77,7 @@ export default (props) => {
         onOk={handleOk}
         onCancel={handleCancel}
         footer={null}
+        maskClosable={false}
       >
         <Form
           {...layout}
@@ -80,17 +87,13 @@ export default (props) => {
           onFinishFailed={onFinishFailed}
         >
           <Form.Item
-            // label="Username"
-            // value={userName}
             name="username"
             rules={[{ required: true, message: "Please input your username!" }]}
           >
-            <Input />
+            <Input ref={loginInputRef}/>
           </Form.Item>
 
           <Form.Item
-            // label="Password"
-            // value={password}
             name="password"
             rules={[{ required: true, message: "Please input your password!" }]}
           >
