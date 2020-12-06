@@ -1,7 +1,7 @@
 /*
  * @Author: mzl
  * @Date: 2020-11-23 21:15:45
- * @LastEditTime: 2020-12-06 02:33:57
+ * @LastEditTime: 2020-12-06 16:52:58
  * @Description: 工具类
  */
 
@@ -78,4 +78,17 @@ export function postAxios({
             reject(err)
         })
     })
+}
+
+// 前端session缓存
+export const sessionStorage = {
+    setCache: () => {
+
+    },
+    getCache: () => {
+
+    },
+    delCache: () => {
+        
+    }
 }
