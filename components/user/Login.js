@@ -1,12 +1,14 @@
 /*
  * @Author: mzl
  * @Date: 2020-11-24 23:23:29
- * @LastEditTime: 2020-12-06 03:22:37
+ * @LastEditTime: 2020-12-06 16:30:28
  * @Description:
  */
 
 import { useState, useEffect, useContext, useRef } from "react";
 import { Form, Input, Modal, Button, message, Checkbox } from "antd";
+
+import { UserContext } from '../../pages/_app';
 
 import { postAxios } from '../../utils';
 
@@ -20,29 +22,36 @@ const tailLayout = {
 };
 
 export default (props) => {
-  // let value = useContext(MyContext);
-  let [loading, setLoading] = useState(false);
-  let [visible, setVisible] = useState(false);
-
   let loginInputRef = useRef();
+  let { state, dispatch } = useContext(UserContext);
+  let [loading, setLoading] = useState(false);
 
   function showModal() {
-    setVisible(true);
+    let { username, isLogin } = state;
+    if (!username && !isLogin) {
+      dispatch({type: 'login', username: state.username, isLogin: true});
+    } else {
+      message.warning('已经登录啦！');
+    }
+  }
+
+  function handleCancel() {
+    dispatch({type: 'login', username: state.username, isLogin: false});
   }
 
   function handleOk() {
     setLoading(true);
   }
 
-  function handleCancel() {
-    setVisible(false);
-  }
+  const onFinishFailed = (errorInfo) => {
+    setLoading(false);
+  };
 
-  function loginAfter({ status, msg }) {
+  function loginAfter({ status, msg, username }) {
     setLoading(false);
     if(status === 200) {
-      setVisible(false);
-      message.success(msg)
+      message.success(msg);
+      dispatch({type: 'login', username, isLogin: false});
     }
     if(status === 500) {
       message.error(msg);
@@ -59,18 +68,14 @@ export default (props) => {
         loginAfter(error);
       });
   };
-
-  const onFinishFailed = (errorInfo) => {
-    setLoading(false);
-  };
-
+  
   return (
     <>
       <Button onClick={showModal}>
         登录
       </Button>
       <Modal
-        visible={visible}
+        visible={state.isLogin}
         centered
         style={{ top: 20 }}
         title="登录啊，寻思啥呢！？"
