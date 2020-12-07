@@ -11,12 +11,13 @@ let userModel = require("../db/models/User");
 
 router.post("/user/login", async (req, res, next) => {
   let { username, password } = req.body;
+  console.log('mm-req.session.userinfo', req.session.userinfo)
   if(req.session.userinfo) {
     res.json({ msg: "登录成功", username });
     return;
   }
   let dbUser = await userModel.doFind({ username, password });
-  if (dbUser) {
+  if (dbUser && dbUser.username === 'mzl' && dbUser.password === '111qqq') {
     req.session.userinfo = dbUser.username;
     res.json({ msg: "登录成功", username });
   } else {
