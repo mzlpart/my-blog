@@ -27,6 +27,7 @@ const initialState = { username: "", isLogin: false };
 export const UserContext = createContext(initialState);
 
 function MyApp({ Component, pageProps }) {
+
   function reducer(state, action) {
     switch (action.type) {
       case "login":

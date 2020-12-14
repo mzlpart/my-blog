@@ -6,9 +6,13 @@
  * @Description: 公共头部提取
  * @FilePath: \my-blog\components\Layout.js
  */
-
+import dynamic from 'next/dynamic'
 import "../styles/Layout.module.less";
-import Header from "../components/Header";
+const Header = dynamic(import("../components/Header"),
+  {
+    ssr: false   // 禁止使用 SSR
+  }
+)
 
 export default ({ children }) => (
   <div className="container">

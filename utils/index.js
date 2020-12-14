@@ -81,12 +81,12 @@ export function postAxios({
 }
 
 // 前端session缓存
-export const sessionStorage = {
-    setCache: () => {
-
+export const CacheConfig = {
+    setCache: (key, value) => {
+        window.localStorage.setItem(key, JSON.stringify(value));
     },
-    getCache: () => {
-
+    getCache: (key) => {
+        return JSON.parse(window.localStorage.getItem(key));
     },
     delCache: () => {
         

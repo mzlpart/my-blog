@@ -13,10 +13,17 @@ import IfComp from "if-comp";
 import { useState, useEffect, useContext, useRef } from "react";
 import WriteArticle from "./user/WriteArticle";
 import { UserContext } from "../pages/_app";
+import { CacheConfig } from '../utils';
 
 export default (props) => {
   let { state } = useContext(UserContext);
-  let { isLogin, username } = state;
+  let { username, isLogin } = state;
+  let userInfo = CacheConfig.getCache('userInfo');
+  // 使用缓存数据
+  if(userInfo) {
+    username = userInfo.username;
+    isLogin = userInfo.isLogin;
+  }
   return (
     <div className="header">
       <Link href="/">

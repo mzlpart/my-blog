@@ -7,6 +7,7 @@
 import { Button, message } from "antd";
 import { useState, useEffect, useContext, useRef } from "react";
 import { UserContext } from '../../pages/_app';
+import { CacheConfig } from '../../utils';
 
 export default (props) => {
 
@@ -14,6 +15,12 @@ export default (props) => {
 
    function writeArticle() {
       let { username, isLogin } = state;
+      let userInfo = CacheConfig.getCache('userInfo');
+      // 使用缓存数据
+      if(userInfo) {
+        username = userInfo.username;
+        isLogin = userInfo.isLogin;
+      }
       if (!username && !isLogin) {
          dispatch({type: 'login', username: '', isLogin: true});
       } else {

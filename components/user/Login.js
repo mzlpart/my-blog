@@ -10,7 +10,7 @@ import { Form, Input, Modal, Button, message, Checkbox } from "antd";
 
 import { UserContext } from '../../pages/_app';
 
-import { postAxios } from '../../utils';
+import { postAxios, CacheConfig } from '../../utils';
 
 const layout = {
   labelCol: { span: 8 },
@@ -51,6 +51,7 @@ export default (props) => {
     setLoading(false);
     if(status === 200) {
       message.success(msg);
+      CacheConfig.setCache('userInfo', {username, isLogin: false});
       dispatch({type: 'login', username, isLogin: false});
     }
     if(status === 500) {
