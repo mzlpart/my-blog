@@ -11,7 +11,7 @@ import Login from "./user/Login";
 import UserAvatar from "./user/Avatar";
 import IfComp from "if-comp";
 import { useState, useEffect, useContext, useRef } from "react";
-import WriteArticle from "./user/WriteArticle";
+import Write from "./user/Write";
 import { UserContext } from "../pages/_app";
 import { CacheConfig } from '../utils';
 
@@ -32,7 +32,7 @@ export default (props) => {
         </p>
       </Link>
       <div className="login-container">
-        <WriteArticle />
+        <Write />
         <IfComp
           expression={!isLogin && username}
           falseComp={<Login />}

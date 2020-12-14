@@ -4,8 +4,9 @@
  * @LastEditTime: 2020-12-06 16:30:35
  * @Description: 
  */
-import { Button, message } from "antd";
 import { useState, useEffect, useContext, useRef } from "react";
+import Router from 'next/router';
+import { Button, message } from "antd";
 import { UserContext } from '../../pages/_app';
 import { CacheConfig } from '../../utils';
 
@@ -25,6 +26,7 @@ export default (props) => {
          dispatch({type: 'login', username: '', isLogin: true});
       } else {
          message.warning('已经登录啦！');
+         Router.push('/writeArticle');
       }
    }
 
