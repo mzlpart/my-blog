@@ -2,16 +2,18 @@
  * @Author: mzl
  * @Date: 2020-11-24 23:23:34
  * @LastEditTime: 2020-12-06 16:30:35
- * @Description: 
+ * @Description: 跳转到写文章页面&&发布文章
  */
 import { useState, useEffect, useContext, useRef } from "react";
-import Router from 'next/router';
+import IfComp from "if-comp";
+import Router, { withRouter } from 'next/router';
 import { Button, message } from "antd";
 import { UserContext } from '../../pages/_app';
 import { CacheConfig } from '../../utils';
 
-export default (props) => {
+const Write = ({ router }) => {
 
+   let { pathname } = router;
    let { state, dispatch } = useContext(UserContext);
 
    function writeArticle() {
@@ -25,8 +27,11 @@ export default (props) => {
       if (!username && !isLogin) {
          dispatch({type: 'login', username: '', isLogin: true});
       } else {
-         message.warning('已经登录啦！');
-         Router.push('/writeArticle');
+         if(pathname !== '/writeArticle') {
+            Router.push('/writeArticle');
+         } else {
+            message.success('发布');
+         }
       }
    }
 
@@ -34,6 +39,8 @@ export default (props) => {
       <Button
          type="primary"
          onClick={writeArticle}
-      >写文章</Button>
+      >{pathname === '/writeArticle' ? '发布' : '写文章'}</Button>
    );
 }
+
+export default withRouter(Write);
