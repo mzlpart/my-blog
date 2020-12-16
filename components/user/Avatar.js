@@ -14,7 +14,7 @@ export default (props) => {
     <Tooltip title={state.username} placement="top">
       <Avatar
         style={{ cursor: 'pointer' }}
-        src="/static/user_avatar.png"/>
+        src="/user_avatar.png"/>
     </Tooltip>
   );
 };
