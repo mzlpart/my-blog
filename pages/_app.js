@@ -1,8 +1,8 @@
 /*
  * @Author: mzl
  * @Date: 2020-11-22 01:48:02
- * @LastEditTime: 2020-12-06 16:28:16
- * @LastEditors: Please set LastEditors
+ * @LastEditTime: 2020-12-17 16:46:40
+ * @LastEditors: your name
  * @Description: 处理公共逻辑：布局、全局状态、国际化等
  * @FilePath: \my-blog\pages\_app.js
  */
@@ -35,6 +35,12 @@ function MyApp({ Component, pageProps }) {
           username: action.username,
           isLogin: action.isLogin
         };
+      case "write":
+        // TODO: 写文章
+        ;
+      case "pushArticle":
+        // TODO: 发布文章
+        ;
       default:
         throw new Error();
     }

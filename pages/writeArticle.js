@@ -1,7 +1,7 @@
 /*
  * @Author: mzl
  * @Date: 2020-12-07 08:57:34
- * @LastEditTime: 2020-12-17 16:01:12
+ * @LastEditTime: 2020-12-17 16:47:25
  * @Description: https://github.com/kkfor/for-editor
  */
 import { useState, useEffect, useContext, useRef } from "react";
@@ -23,10 +23,11 @@ export default (props) => {
     console.log(params);
     console.log('-----------------------');
     console.log(result);
+    // TODO: 持久化; 并在保存文章成功后，清空该缓存
   }
 
-  function handleChange(value) {
-    console.log(`selected ${value}`);
+  function typeChange(value) {
+    setArticleType(value);
   }
 
   return (
@@ -34,9 +35,9 @@ export default (props) => {
       <div className="article-type">
         <Select
           bordered={false}
-          defaultValue="react"
+          defaultValue={articleType}
           style={{ width: 120 }}
-          onChange={handleChange}
+          onChange={typeChange}
         >
           <Option value="react">React</Option>
           <Option value="js">Js</Option>

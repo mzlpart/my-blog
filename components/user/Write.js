@@ -1,7 +1,7 @@
 /*
  * @Author: mzl
  * @Date: 2020-11-24 23:23:34
- * @LastEditTime: 2020-12-06 16:30:35
+ * @LastEditTime: 2020-12-17 16:44:06
  * @Description: 跳转到写文章页面&&发布文章
  */
 import { useState, useEffect, useContext, useRef } from "react";
@@ -31,7 +31,7 @@ const Write = ({ router }) => {
             Router.push('/writeArticle');
          } else {
             message.success('发布');
-            // Router.push('/article');
+            
          }
       }
    }
