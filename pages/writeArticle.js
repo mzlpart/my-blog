@@ -7,16 +7,21 @@
 import { useState, useEffect, useContext, useRef } from "react";
 import { Select } from "antd";
 import dynamic from "next/dynamic";
+import MarkdownIt  from 'markdown-it';
 import "../styles/Editor.module.less";
 
 const { Option } = Select;
+const md = new MarkdownIt();
 const Editor = dynamic(import("for-editor"), { ssr: false });
 
 export default (props) => {
   const [value, setValue] = useState("");
 
   function save(params) {
-    console.log("mm-params", params);
+    let result = md.render(params);
+    console.log(params);
+    console.log('-----------------------');
+    console.log(result);
   }
 
   function handleChange(value) {

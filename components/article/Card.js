@@ -28,7 +28,6 @@ export default ({ type, time }) => (
         </div>
         <Card
           bodyStyle={{display: 'none'}}
-          hoverable
           className="article-card-main article-card-end"
           cover={
             <div className="article-card-container">

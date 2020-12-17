@@ -31,6 +31,7 @@ const Write = ({ router }) => {
             Router.push('/writeArticle');
          } else {
             message.success('发布');
+            // Router.push('/article');
          }
       }
    }
