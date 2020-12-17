@@ -1,7 +1,7 @@
 /*
  * @Author: mzl
  * @Date: 2020-12-07 08:57:34
- * @LastEditTime: 2020-12-16 21:44:50
+ * @LastEditTime: 2020-12-17 16:01:12
  * @Description: https://github.com/kkfor/for-editor
  */
 import { useState, useEffect, useContext, useRef } from "react";
@@ -15,7 +15,8 @@ const md = new MarkdownIt();
 const Editor = dynamic(import("for-editor"), { ssr: false });
 
 export default (props) => {
-  const [value, setValue] = useState("");
+  const [articleType, setArticleType] = useState("react"); // 文章类型
+  const [markdonwValue, setMarkdonwValue] = useState("");  // markdown文本
 
   function save(params) {
     let result = md.render(params);
@@ -47,10 +48,10 @@ export default (props) => {
         height="800px"
         preview={true}
         subfield={true}
-        value={value}
+        value={markdonwValue}
         placeholder="可以预留一个模板位置在这里"
         onSave={(params) => save(params)}
-        onChange={(value) => setValue(value)}
+        onChange={(value) => setMarkdonwValue(value)}
       />
     </div>
   );
