@@ -1,7 +1,7 @@
 /*
  * @Author: mzl
  * @Date: 2020-12-07 08:57:34
- * @LastEditTime: 2020-12-18 09:59:40
+ * @LastEditTime: 2020-12-18 10:48:57
  * @Description: https://github.com/kkfor/for-editor
  */
 import { useState, useEffect, useContext, useRef } from "react";
@@ -32,13 +32,24 @@ export default (props) => {
   // 监听路由变化，提示我自己没有保存就想跳转页面
   const router = useRouter();
   useEffect(() => {
+
+    // router.beforePopState(({ url, as, options }) => {
+    //   // I only want to allow these two routes!
+    //   console.log(as)
+    //   if (as !== '/' && as !== '/other') {
+    //     // Have SSR render bad routes as a 404.
+    //     window.location.href = as
+    //     return false
+    //   }
+
+    //   return true
+    // })
+
     const handleRouteChange = (url) => {
       console.log('App is changing to: ', url)
       return false;
     }
-
     router.events.on('routeChangeStart', handleRouteChange)
-
     return () => {
       router.events.off('routeChangeStart', handleRouteChange)
     }
