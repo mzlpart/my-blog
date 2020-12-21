@@ -1,7 +1,7 @@
 /*
  * @Author: mzl
  * @Date: 2020-12-07 08:57:34
- * @LastEditTime: 2020-12-21 13:54:43
+ * @LastEditTime: 2020-12-21 14:25:47
  * @Description: https://github.com/kkfor/for-editor
  */
 import { useState, useEffect, useContext, useRef } from "react";
@@ -10,6 +10,7 @@ import dynamic from "next/dynamic";
 import { useRouter } from 'next/router'
 import MarkdownIt from 'markdown-it';
 import { CacheConfig } from '../utils';
+import { UserContext } from '../pages/_app';
 import "../styles/Editorstyle.module.less";
 
 const { Option } = Select;
@@ -18,8 +19,9 @@ const Editor = dynamic(import("for-editor"), { ssr: false });
 
 export default (props) => {
 
-  const [articleType, setArticleType] = useState("react"); // 文章类型
-  const [markdonwValue, setMarkdonwValue] = useState("");  // markdown文本
+  let { dispatch } = useContext(UserContext);
+  let [articleType, setArticleType] = useState("react"); // 文章类型
+  let [markdonwValue, setMarkdonwValue] = useState("");  // markdown文本
 
   // 处理未保存文章缓存
   useEffect(() => {
@@ -42,7 +44,6 @@ export default (props) => {
   }, [articleType, markdonwValue]) // 其中任意一个变化，都重新绑定一次，以获取最新变量
 
   function save(params) {
-    // let result = md.render(params);
     setCacheArticle();
     message.success('缓存成功！');
   }
@@ -53,9 +54,17 @@ export default (props) => {
     CacheConfig.setCache('markdonwValue', markdonwValue);
   }
 
-  // 文章类型
-  function typeChange(value) {
+  // 变更文章类型
+  const typeChange = (value) => {
     setArticleType(value);
+  }
+
+  // 文章内容变更
+  const articleChange = (value) => {
+    // let result = md.render(params);
+    setMarkdonwValue(value);
+    // TODO: dispathc write 
+    // dispatch({});
   }
   
   return (
@@ -79,8 +88,8 @@ export default (props) => {
         subfield={true}
         value={markdonwValue}
         placeholder="可以预留一个模板位置在这里"
-        onSave={(params) => save(params)}
-        onChange={(value) => setMarkdonwValue(value)}
+        onSave={(value) => save(value)}
+        onChange={(value) => articleChange(value)}
       />
     </div>
   );
