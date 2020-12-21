@@ -1,11 +1,11 @@
 /*
  * @Author: mzl
  * @Date: 2020-12-07 08:57:34
- * @LastEditTime: 2020-12-21 12:03:26
+ * @LastEditTime: 2020-12-21 13:54:43
  * @Description: https://github.com/kkfor/for-editor
  */
 import { useState, useEffect, useContext, useRef } from "react";
-import { Select } from "antd";
+import { Select, message } from "antd";
 import dynamic from "next/dynamic";
 import { useRouter } from 'next/router'
 import MarkdownIt from 'markdown-it';
@@ -29,34 +29,41 @@ export default (props) => {
     setMarkdonwValue(localMarkdonw);
   }, []);
 
-  // 监听路由变化
+  // 监听路由变化, 自动保存当前编辑
   const router = useRouter();
   useEffect(() => {
     const handleRouteChange = (url) => {
-      console.log('App is changing to: ', url)
+      setCacheArticle();
     }
     router.events.on('routeChangeStart', handleRouteChange)
     return () => {
       router.events.off('routeChangeStart', handleRouteChange)
     }
-  }, [])
+  }, [articleType, markdonwValue]) // 其中任意一个变化，都重新绑定一次，以获取最新变量
 
   function save(params) {
     // let result = md.render(params);
+    setCacheArticle();
+    message.success('缓存成功！');
+  }
+
+  // 设置文章缓存
+  function setCacheArticle() {
     CacheConfig.setCache('articleType', articleType);
     CacheConfig.setCache('markdonwValue', markdonwValue);
   }
 
+  // 文章类型
   function typeChange(value) {
     setArticleType(value);
   }
-
+  
   return (
     <div className="editor-container">
       <div className="article-type">
         <Select
           bordered={false}
-          defaultValue={articleType}
+          value={articleType}
           style={{ width: 120 }}
           onChange={typeChange}
         >
