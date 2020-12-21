@@ -1,7 +1,7 @@
 /*
  * @Author: mzl
  * @Date: 2020-12-07 08:57:34
- * @LastEditTime: 2020-12-18 10:48:57
+ * @LastEditTime: 2020-12-21 12:03:26
  * @Description: https://github.com/kkfor/for-editor
  */
 import { useState, useEffect, useContext, useRef } from "react";
@@ -10,7 +10,7 @@ import dynamic from "next/dynamic";
 import { useRouter } from 'next/router'
 import MarkdownIt from 'markdown-it';
 import { CacheConfig } from '../utils';
-import "../styles/Editor.module.less";
+import "../styles/Editorstyle.module.less";
 
 const { Option } = Select;
 const md = new MarkdownIt();
@@ -29,25 +29,11 @@ export default (props) => {
     setMarkdonwValue(localMarkdonw);
   }, []);
 
-  // 监听路由变化，提示我自己没有保存就想跳转页面
+  // 监听路由变化
   const router = useRouter();
   useEffect(() => {
-
-    // router.beforePopState(({ url, as, options }) => {
-    //   // I only want to allow these two routes!
-    //   console.log(as)
-    //   if (as !== '/' && as !== '/other') {
-    //     // Have SSR render bad routes as a 404.
-    //     window.location.href = as
-    //     return false
-    //   }
-
-    //   return true
-    // })
-
     const handleRouteChange = (url) => {
       console.log('App is changing to: ', url)
-      return false;
     }
     router.events.on('routeChangeStart', handleRouteChange)
     return () => {

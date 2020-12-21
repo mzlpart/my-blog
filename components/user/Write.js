@@ -1,12 +1,12 @@
 /*
  * @Author: mzl
  * @Date: 2020-11-24 23:23:34
- * @LastEditTime: 2020-12-17 16:44:06
+ * @LastEditTime: 2020-12-21 12:04:01
  * @Description: 跳转到写文章页面&&发布文章
  */
 import { useState, useEffect, useContext, useRef } from "react";
 import IfComp from "if-comp";
-import Router, { withRouter } from 'next/router';
+import { withRouter } from 'next/router';
 import { Button, message } from "antd";
 import { UserContext } from '../../pages/_app';
 import { CacheConfig } from '../../utils';
@@ -28,7 +28,7 @@ const Write = ({ router }) => {
          dispatch({type: 'login', username: '', isLogin: true});
       } else {
          if(pathname !== '/writeArticle') {
-            Router.push('/writeArticle');
+            router.push('/writeArticle');
          } else {
             message.success('发布');
             
