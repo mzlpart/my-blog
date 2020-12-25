@@ -1,19 +1,19 @@
 /*
  * @Author: mzl
  * @Date: 2020-12-21 14:02:50
- * @LastEditTime: 2020-12-21 14:03:22
- * @LastEditors: your name
+ * @LastEditTime: 2020-12-25 11:07:18
+ * @LastEditors: mzl
  * @Description: 文章数据结构表
  */
 const mongoose = require('mongoose');
 const Schema = mongoose.Schema;
 
 const articleSchema = new Schema({
-    username: {
+    type: {
         type: String,
         require: true
     },
-    password: {
+    content: {
         type: String,
         require: true
     }

@@ -1,7 +1,7 @@
 /*
  * @Author: mzl
  * @Date: 2020-12-07 08:57:34
- * @LastEditTime: 2020-12-21 14:25:47
+ * @LastEditTime: 2020-12-25 11:08:51
  * @Description: https://github.com/kkfor/for-editor
  */
 import { useState, useEffect, useContext, useRef } from "react";
@@ -11,7 +11,6 @@ import { useRouter } from 'next/router'
 import MarkdownIt from 'markdown-it';
 import { CacheConfig } from '../utils';
 import { UserContext } from '../pages/_app';
-import "../styles/Editorstyle.module.less";
 
 const { Option } = Select;
 const md = new MarkdownIt();
@@ -43,7 +42,7 @@ export default (props) => {
     }
   }, [articleType, markdonwValue]) // 其中任意一个变化，都重新绑定一次，以获取最新变量
 
-  function save(params) {
+  const save = (params) => {
     setCacheArticle();
     message.success('缓存成功！');
   }
@@ -68,8 +67,8 @@ export default (props) => {
   }
   
   return (
-    <div className="editor-container">
-      <div className="article-type">
+    <div className="editor-container" style={{position: 'relative', marginTop: 60}}>
+      <div className="article-type" style={{position: 'absolute', top: 6, left: 390}}>
         <Select
           bordered={false}
           value={articleType}
