@@ -1,10 +1,10 @@
 /*
  * @Author: mzl
  * @Date: 2020-12-07 08:57:34
- * @LastEditTime: 2020-12-25 11:08:51
+ * @LastEditTime: 2020-12-28 15:40:07
  * @Description: https://github.com/kkfor/for-editor
  */
-import { useState, useEffect, useContext, useRef } from "react";
+import { useState, useEffect, useContext, useRef, useCallback } from "react";
 import { Select, message } from "antd";
 import dynamic from "next/dynamic";
 import { useRouter } from 'next/router'
@@ -30,9 +30,11 @@ export default (props) => {
     setMarkdonwValue(localMarkdonw);
   }, []);
 
-  // 监听路由变化, 自动保存当前编辑
   const router = useRouter();
   useEffect(() => {
+    // 文章信息、类型变化
+    dispatch({ type: 'write', markdonwValue, articleType });
+    // 监听路由变化, 自动保存当前编辑
     const handleRouteChange = (url) => {
       setCacheArticle();
     }
@@ -44,7 +46,7 @@ export default (props) => {
 
   const save = (params) => {
     setCacheArticle();
-    message.success('缓存成功！');
+    message.success('本地保存成功！');
   }
 
   // 设置文章缓存
@@ -60,15 +62,12 @@ export default (props) => {
 
   // 文章内容变更
   const articleChange = (value) => {
-    // let result = md.render(params);
     setMarkdonwValue(value);
-    // TODO: dispathc write 
-    // dispatch({});
   }
-  
+
   return (
-    <div className="editor-container" style={{position: 'relative', marginTop: 60}}>
-      <div className="article-type" style={{position: 'absolute', top: 6, left: 390}}>
+    <div className="editor-container" style={{ position: 'relative', marginTop: 60 }}>
+      <div className="article-type" style={{ position: 'absolute', top: 6, left: 390 }}>
         <Select
           bordered={false}
           value={articleType}
