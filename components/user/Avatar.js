@@ -1,7 +1,7 @@
 /*
  * @Author: mzl
  * @Date: 2020-11-24 23:23:29
- * @LastEditTime: 2020-12-29 17:20:16
+ * @LastEditTime: 2020-12-30 13:40:31
  * @Description: 头像, 下拉菜单
  */
 import { Avatar, Dropdown, Menu, Button, Modal, Input, message } from "antd";
@@ -16,14 +16,17 @@ export default (props) => {
   let { state } = useContext(UserContext);
 
   const showCategoryModal = () => {
-    // 清空输入
-    setCategory('');
     setIsModalVisible(true);
+  }
+
+  const hiddenCategoryModal = () => {
+    setCategory(''); // 清空输入
+    setIsModalVisible(false);
   }
 
   const saveCategory = () => {
     if(category) {
-      setIsModalVisible(false);
+      hiddenCategoryModal();
       console.log('mzl', category)
     } else {
       message.warning('请输入类别名称！');
@@ -31,8 +34,9 @@ export default (props) => {
   };
 
   const handleCancel = () => {
-    setIsModalVisible(false);
+    hiddenCategoryModal();
   };
+
 
   return (
     <>
