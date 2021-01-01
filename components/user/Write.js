@@ -14,17 +14,17 @@ import { CacheConfig } from '../../utils';
 const Write = ( { router }) => {
    let { pathname } = router;
    let { state, dispatch } = useContext(UserContext);
-   let { isLogin, username, type, content, description } = state;
+   let { isOnline, username, type, content, description } = state;
    // 编辑文章
    const writeArticle = () => {
       let userInfo = CacheConfig.getCache('userInfo');
       // 使用缓存数据
       if (userInfo) {
          username = userInfo.username;
-         isLogin = userInfo.isLogin;
+         isOnline = userInfo.isOnline;
       }
-      if (!username && !isLogin) {
-         dispatch({ type: 'login', username: '', isLogin: true });
+      if (!username && !isOnline) {
+         dispatch({ type: 'login', username: '', isOnline: true });
       } else {
          router.push('/writeArticle');
       }

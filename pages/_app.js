@@ -29,7 +29,7 @@ message.config({
  * @param content   ---    文章内容
  */
 
-const initialState = { username: "", isLogin: false };
+const initialState = { username: "", isOnline: false };
 export const UserContext = createContext(initialState);
 
 function MyApp({ Component, pageProps }) {
@@ -42,7 +42,7 @@ function MyApp({ Component, pageProps }) {
   //     case "login":
   //       return {
   //         username: action.username,
-  //         isLogin: action.isLogin
+  //         isOnline: action.isOnline
   //       };
   //     case "write":
   //       console.log('mm-test', 222)

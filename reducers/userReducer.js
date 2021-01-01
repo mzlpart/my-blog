@@ -11,7 +11,7 @@ const userReducer = (state, action) => {
         case "login":
             return {
                 username: action.username,
-                isLogin: action.isLogin
+                isOnline: action.isOnline
             };
         case "write":
             return {

@@ -9,7 +9,7 @@ import { useState, useContext } from "react";
 import { UserContext } from "../../pages/_app";
 import { postAxios } from '../../utils';
 
-export default (props) => {
+const MyAvatar = (props) => {
 
   const [category, setCategory] = useState('');
   const [isModalVisible, setIsModalVisible] = useState(false);
@@ -27,7 +27,17 @@ export default (props) => {
   const saveCategory = () => {
     if(category) {
       hiddenCategoryModal();
-      console.log('mzl', category)
+      postAxios({url: '/category/add', data: { name: category }})
+      .then(res => {
+        let { msg, status } = res;
+        if(status === 200) {
+          message.success(msg);
+        }
+      })
+      .catch(error => {
+        let { msg } = error;
+        message.error(msg);
+      });
     } else {
       message.warning('请输入类别名称！');
     }
@@ -71,3 +81,5 @@ export default (props) => {
     </>
   );
 };
+
+export default MyAvatar;

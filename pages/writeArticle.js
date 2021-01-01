@@ -30,6 +30,11 @@ export default (props) => {
     setMarkdonwValue(localMarkdonw);
   }, []);
 
+  // 获取文章类别
+  useEffect(async () => {
+    
+  }, []);
+
   const router = useRouter();
   useEffect(() => {
     // 文章信息、类型变化

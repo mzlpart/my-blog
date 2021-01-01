@@ -17,12 +17,12 @@ import { CacheConfig } from '../utils';
 
 export default (props) => {
   let { state, dispatch } = useContext(UserContext);
-  let { username, isLogin } = state;
+  let { username, isOnline } = state;
   // 使用缓存数据
   useEffect(() => {
     let userInfo = CacheConfig.getCache('userInfo');
     if(userInfo) {
-      dispatch({type: 'login', username: userInfo.username, isLogin: userInfo.isLogin});
+      dispatch({type: 'login', username: userInfo.username, isOnline: userInfo.isOnline});
     }
   }, []);
 
@@ -36,7 +36,7 @@ export default (props) => {
       <div className="login-container">
         <Write />
         <IfComp
-          expression={!isLogin && username}
+          expression={!isOnline && username}
           falseComp={<Login />}
           trueComp={<UserAvatar />}
         />

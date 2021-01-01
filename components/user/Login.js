@@ -27,16 +27,16 @@ export default (props) => {
   let [loading, setLoading] = useState(false);
 
   function showModal() {
-    let { username, isLogin } = state;
-    if (!username && !isLogin) {
-      dispatch({type: 'login', username: state.username, isLogin: true});
+    let { username, isOnline } = state;
+    if (!username && !isOnline) {
+      dispatch({type: 'login', username: state.username, isOnline: true});
     } else {
       message.warning('已经登录啦！');
     }
   }
 
   function handleCancel() {
-    dispatch({type: 'login', username: state.username, isLogin: false});
+    dispatch({type: 'login', username: state.username, isOnline: false});
   }
 
   function handleOk() {
@@ -51,8 +51,8 @@ export default (props) => {
     setLoading(false);
     if(status === 200) {
       message.success(msg);
-      CacheConfig.setCache('userInfo', {username, isLogin: false});
-      dispatch({type: 'login', username, isLogin: false});
+      CacheConfig.setCache('userInfo', {username, isOnline: false});
+      dispatch({type: 'login', username, isOnline: false});
     }
     if(status === 500) {
       message.error(msg);
@@ -77,7 +77,7 @@ export default (props) => {
         登录
       </Button>
       <Modal
-        visible={state.isLogin}
+        visible={state.isOnline}
         centered
         style={{ top: 20 }}
         title="登录啊，寻思啥呢！？"
