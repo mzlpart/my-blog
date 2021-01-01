@@ -18,8 +18,8 @@ let categoryModel = {
     doDel: (params) => {
         console.log('类别删除');
     },
-    doFind: (params) => {
-        return Category.findOne(params);
+    doFind: () => {
+        return Category.find();
     },
     doUpdate: (params) => {
         console.log('类别更新');

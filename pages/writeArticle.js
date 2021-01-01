@@ -9,7 +9,8 @@ import { Select, message } from "antd";
 import dynamic from "next/dynamic";
 import { useRouter } from 'next/router'
 import MarkdownIt from 'markdown-it';
-import { CacheConfig } from '../utils';
+import { CacheConfig, getAxios } from '../utils';
+import { useGetCategories } from '../utils/common.effects';
 import { UserContext } from '../pages/_app';
 
 const { Option } = Select;
@@ -19,20 +20,31 @@ const Editor = dynamic(import("for-editor"), { ssr: false });
 export default (props) => {
 
   let { dispatch } = useContext(UserContext);
-  let [articleType, setArticleType] = useState("react"); // 文章类型
+  // let [categories, setCategories] = useGetCategories([]); // 文章类别列表
+  let [categories, setCategories] = useState([]); // 文章类别列表
+  let [articleType, setArticleType] = useState("React"); // 文章类型
   let [markdonwValue, setMarkdonwValue] = useState("");  // markdown文本
 
   // 处理未保存文章缓存
   useEffect(() => {
-    let localType = CacheConfig.getCache('articleType') || 'react';
+    let localType = CacheConfig.getCache('articleType') || 'React';
     let localMarkdonw = CacheConfig.getCache('markdonwValue') || '';
     setArticleType(localType);
     setMarkdonwValue(localMarkdonw);
   }, []);
 
   // 获取文章类别
-  useEffect(async () => {
-    
+  useEffect(() => {
+    getAxios({url: '/category/query'})
+    .then(res => {
+      let { categories, status } = res;
+      if(status === 200) {
+        setCategories(categories);
+      }
+    })
+    .catch(error => {
+      console.log('mzl', error)
+    });
   }, []);
 
   const router = useRouter();
@@ -79,10 +91,9 @@ export default (props) => {
           style={{ width: 120 }}
           onChange={typeChange}
         >
-          <Option value="react">React</Option>
-          <Option value="js">Js</Option>
-          <Option value="node">Node</Option>
-          <Option value="other">Other</Option>
+          {categories && categories.map((item) => (
+            <Option value={item.name} key={item._id}>{item.name}</Option>
+          ))}
         </Select>
       </div>
       <Editor

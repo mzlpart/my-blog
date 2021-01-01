@@ -26,5 +26,10 @@ router.post('/category/add', async (req, res, next) => {
     }
 });
 
+router.get('/category/query', async (req, res, next) => {
+    let result = await categoryModel.doFind();
+    res.json({categories: result});
+});
+
 module.exports = router;
 
