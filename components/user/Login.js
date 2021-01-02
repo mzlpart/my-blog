@@ -25,18 +25,18 @@ export default (props) => {
   let loginInputRef = useRef();
   let { state, dispatch } = useContext(UserContext);
   let [loading, setLoading] = useState(false);
+  let { username, isOnline } = state.userReducer;
 
   function showModal() {
-    let { username, isOnline } = state.userReducer;
-    if (!username && !isOnline) {
-      dispatch({type: 'login', username: state.username, isOnline: true});
+    if (!isOnline) {
+      dispatch({type: 'login', username, isOnline: true});
     } else {
       message.warning('已经登录啦！');
     }
   }
 
   function handleCancel() {
-    dispatch({type: 'login', username: state.username, isOnline: false});
+    dispatch({type: 'login', username, isOnline: false});
   }
 
   function handleOk() {
@@ -77,7 +77,7 @@ export default (props) => {
         登录
       </Button>
       <Modal
-        visible={state.isOnline}
+        visible={isOnline}
         centered
         style={{ top: 20 }}
         title="登录啊，寻思啥呢！？"

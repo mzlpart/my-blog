@@ -20,7 +20,7 @@ const Editor = dynamic(import("for-editor"), { ssr: false });
 const WirteActicle = (props) => {
 
   let { state, dispatch } = useContext(UserContext);
-  let categories = useGetCategories(state.articleReducer.isFetch); // 文章类别列表
+  let categories = useGetCategories(); // 文章类别列表
   let [articleType, setArticleType] = useState("React"); // 文章类型
   let [markdonwValue, setMarkdonwValue] = useState("");  // markdown文本
 
