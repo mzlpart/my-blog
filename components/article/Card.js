@@ -18,7 +18,7 @@ import {
 const { Meta } = Card;
 const liList = [1, 2, 3, 4, 5, 6, 7];
 
-export default ({ type, time }) => (
+const ArticleCard = ({ type, time }) => (
   <IfComp
     expression={!!type}
     trueComp={
@@ -76,3 +76,4 @@ export default ({ type, time }) => (
     }
   />
 );
+export default ArticleCard;
