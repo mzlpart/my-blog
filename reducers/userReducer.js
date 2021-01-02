@@ -11,7 +11,7 @@ const userInitialState = {
     isOnline: false,   // 是否登录
 };
 
-const userReducer = (state = initialState, action) => {
+const userReducer = (state, action) => {
     switch (action.type) {
         case "login":
             return {

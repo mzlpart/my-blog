@@ -10,7 +10,7 @@ const articleInitialState = {
     isFetch: false, // 是否拉取类别数据
 };
 
-const articleReducer = (state = initialState, action) => {
+const articleReducer = (state, action) => {
     switch (action.type) {
         case "CategoryAdd":
             return {
