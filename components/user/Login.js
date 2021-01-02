@@ -27,7 +27,7 @@ export default (props) => {
   let [loading, setLoading] = useState(false);
 
   function showModal() {
-    let { username, isOnline } = state;
+    let { username, isOnline } = state.userReducer;
     if (!username && !isOnline) {
       dispatch({type: 'login', username: state.username, isOnline: true});
     } else {
