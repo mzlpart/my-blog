@@ -19,22 +19,22 @@ export function timeFormat(timestamp) {
 
 // axios设置
 let baseURL = '';
-if( process.env.NODE_ENV === 'production' ) {
+if (process.env.NODE_ENV === 'production') {
     baseURL = '上线的地址';
 } else {
     baseURL = 'http://localhost:3000/api';
 }
 
 // 允许携带cookie 后端session用到
-axios.defaults.withCredentials=true;
+axios.defaults.withCredentials = true;
 
 // 拦截器
 axios.interceptors.response.use(response => {
     let { status, data } = response;
-    return {...data, status};
-}, ({response}) => {
-    let {status, data}  = response;
-    return Promise.reject({status, ...data});
+    return { ...data, status };
+}, ({ response }) => {
+    let { status, data } = response;
+    return Promise.reject({ status, ...data });
 })
 
 axios.interceptors.request.use(config => {
@@ -47,19 +47,18 @@ axios.interceptors.request.use(config => {
 })
 
 // axios的get请求
-export function getAxios({
+export async function getAxios({
     url,
-    params={}
+    params = {}
 }) {
-    return new Promise((resolve, reject) => {
-        axios.get(url, {
-            params,
-        }).then(res => {
-            resolve(res)
-        }).catch(err => {
-            reject(err)
+    try {
+        let res = await axios.get(url, { params });
+        return new Promise((resolve) => {
+            resolve(res);
         })
-    })
+    } catch (error) {
+        console.log(error)
+    }
 }
 
 // axios的post请求
@@ -89,6 +88,6 @@ export const CacheConfig = {
         return JSON.parse(window.localStorage.getItem(key));
     },
     delCache: () => {
-        
+
     }
 }

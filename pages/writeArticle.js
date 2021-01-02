@@ -17,11 +17,10 @@ const { Option } = Select;
 const md = new MarkdownIt();
 const Editor = dynamic(import("for-editor"), { ssr: false });
 
-export default (props) => {
+const WirteActicle = (props) => {
 
   let { dispatch } = useContext(UserContext);
-  // let [categories, setCategories] = useGetCategories([]); // 文章类别列表
-  let [categories, setCategories] = useState([]); // 文章类别列表
+  let categories = useGetCategories(); // 文章类别列表
   let [articleType, setArticleType] = useState("React"); // 文章类型
   let [markdonwValue, setMarkdonwValue] = useState("");  // markdown文本
 
@@ -31,20 +30,6 @@ export default (props) => {
     let localMarkdonw = CacheConfig.getCache('markdonwValue') || '';
     setArticleType(localType);
     setMarkdonwValue(localMarkdonw);
-  }, []);
-
-  // 获取文章类别
-  useEffect(() => {
-    getAxios({url: '/category/query'})
-    .then(res => {
-      let { categories, status } = res;
-      if(status === 200) {
-        setCategories(categories);
-      }
-    })
-    .catch(error => {
-      console.log('mzl', error)
-    });
   }, []);
 
   const router = useRouter();
@@ -108,3 +93,5 @@ export default (props) => {
     </div>
   );
 };
+
+export default WirteActicle;
