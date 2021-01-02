@@ -6,10 +6,16 @@
  * @Description: 用户相关reducer
  */
 
-const userReducer = (state, action) => {
+const userInitialState = {
+    username: "",      // 用户名
+    isOnline: false,   // 是否登录
+};
+
+const userReducer = (state = initialState, action) => {
     switch (action.type) {
         case "login":
             return {
+                ...state,
                 username: action.username,
                 isOnline: action.isOnline
             };
@@ -21,8 +27,11 @@ const userReducer = (state, action) => {
                 content: action.markdonwValue
             };
         default:
-            throw new Error();
+            return state;
     }
 }
 
-export default userReducer;
+export {
+    userInitialState,
+    userReducer
+};

@@ -5,8 +5,15 @@
  * @LastEditors: mzl
  * @Description: reducer汇总
  */
-import userReducer from './userReducer';
+
+import { combineReducers } from './../utils';
+import { userInitialState, userReducer } from './userReducer';
+import { articleInitialState, articleReducer } from "./articleReducer";
+
+let reducers = combineReducers({ userReducer, articleReducer });
+let initialState = { userReducer: userInitialState, articleReducer: articleInitialState }
 
 export {
-    userReducer,
-}
+    reducers,
+    initialState
+};

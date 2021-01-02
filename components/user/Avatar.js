@@ -13,7 +13,7 @@ const MyAvatar = (props) => {
 
   const [category, setCategory] = useState('');
   const [isModalVisible, setIsModalVisible] = useState(false);
-  let { state } = useContext(UserContext);
+  let { state, dispatch } = useContext(UserContext);
 
   const showCategoryModal = () => {
     setIsModalVisible(true);
@@ -31,6 +31,7 @@ const MyAvatar = (props) => {
       .then(res => {
         let { msg, status } = res;
         if(status === 200) {
+          dispatch({type: 'CategoryAdd', isFetch: !state.articleReducer.isFetch});
           message.success(msg);
         }
       })

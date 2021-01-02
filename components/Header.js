@@ -17,7 +17,7 @@ import { CacheConfig } from '../utils';
 
 export default (props) => {
   let { state, dispatch } = useContext(UserContext);
-  let { username, isOnline } = state;
+  let { username, isOnline } = state.userReducer;
   // 使用缓存数据
   useEffect(() => {
     let userInfo = CacheConfig.getCache('userInfo');

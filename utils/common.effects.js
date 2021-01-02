@@ -9,14 +9,14 @@
 import { useState, useEffect, useContext, useRef } from "react";
 import { getAxios } from './index';
 
-function useGetCategories(list = []) {
-  let [categories, setCategories] = useState(list); // 类别列表
+function useGetCategories(flag) {
+  let [categories, setCategories] = useState([]); // 类别列表
   useEffect(async () => {
     let { categories, status } = await getAxios({ url: '/category/query' });
     if (status === 200) {
       setCategories(categories);
     }
-  }, []);
+  }, [flag]);
   return categories;
 }
 

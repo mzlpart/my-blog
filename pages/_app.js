@@ -11,7 +11,7 @@ import Head from "next/head";
 import Layout from "../components/Layout";
 import moment from "moment";
 import { message } from "antd";
-import { userReducer } from '../reducers';
+import { reducers, initialState } from '../reducers';
 
 import "antd/dist/antd.css"; // 先不走按需引入(后期解决)
 import "../styles/globals.css";
@@ -29,8 +29,7 @@ message.config({
  * @param content   ---    文章内容
  */
 
-const initialState = { username: "", isOnline: false };
-export const UserContext = createContext(initialState);
+export const UserContext = createContext();
 
 function MyApp({ Component, pageProps }) {
 
@@ -59,9 +58,7 @@ function MyApp({ Component, pageProps }) {
   //       throw new Error();
   //   }
   // }
-
-  const [state, dispatch] = useReducer(userReducer, initialState);
-
+  const [state, dispatch] = useReducer(reducers, initialState);
   return (
     <>
       <Head>
