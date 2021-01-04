@@ -1,7 +1,7 @@
 /*
  * @Author: your name
  * @Date: 2020-11-22 11:40:54
- * @LastEditTime: 2020-12-28 15:35:32
+ * @LastEditTime: 2021-01-04 14:34:06
  * @LastEditors: mzl
  * @Description: In User Settings Edit
  * @FilePath: \blog\components\Header.js
@@ -15,7 +15,7 @@ import Write from "./user/Write";
 import { UserContext } from "../pages/_app";
 import { CacheConfig } from '../utils';
 
-export default (props) => {
+const MyHeader = (props) => {
 
   let { state, dispatch } = useContext(UserContext);
   let { username, isOnline } = state.userReducer;
@@ -45,3 +45,4 @@ export default (props) => {
     </div>
   );
 };
+export default MyHeader;

@@ -1,18 +1,20 @@
 /*
  * @Author: your name
  * @Date: 2020-11-22 10:51:22
- * @LastEditTime: 2020-12-18 10:22:56
- * @LastEditors: your name
+ * @LastEditTime: 2021-01-04 14:42:08
+ * @LastEditors: mzl
  * @Description: 公共头部提取
  * @FilePath: \my-blog\components\Layout.js
  */
-import Header from '../components/Header';
+import MyHeader from '../components/Header';
 
 import "../styles/Layout.module.less";
 
-export default ({ children }) => (
+const Layout =  ({ children }) => (
   <div className="container">
-    <Header></Header>
+    <MyHeader></MyHeader>
     <div className="main-body">{children}</div>
   </div>
 );
+
+export default Layout;
