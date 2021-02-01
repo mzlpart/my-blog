@@ -1,7 +1,7 @@
 /*
  * @Author: mzl
  * @Date: 2020-12-28 14:30:29
- * @LastEditTime: 2020-12-28 15:39:55
+ * @LastEditTime: 2021-02-01 10:35:28
  * @LastEditors: mzl
  * @Description: 用户相关reducer
  */
@@ -23,7 +23,6 @@ const userReducer = (state, action) => {
             return {
                 ...state,
                 type: action.articleType,
-                description: action.description,
                 content: action.markdonwValue
             };
         default:

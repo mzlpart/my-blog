@@ -1,7 +1,7 @@
 /*
  * @Author: mzl
  * @Date: 2020-11-22 01:48:02
- * @LastEditTime: 2020-12-28 14:31:55
+ * @LastEditTime: 2021-02-01 10:31:25
  * @LastEditors: mzl
  * @Description: 处理公共逻辑：布局、全局状态、国际化等
  * @FilePath: \my-blog\pages\_app.js
@@ -32,32 +32,6 @@ message.config({
 export const UserContext = createContext();
 
 function MyApp({ Component, pageProps }) {
-
-  // reducer抽出为单独文件，放在这里不合理
-  // 第一点: 页面入口，怎么能放reducer这种逻辑代码？
-  // 第二点: 子页dispatch 会导致执行两次reducer？原因，不清楚，大概是重新生成了Provider, 导致内部重新生成了一次dispatch
-  // const reducer = (state, action) => {
-  //   switch (action.type) {
-  //     case "login":
-  //       return {
-  //         username: action.username,
-  //         isOnline: action.isOnline
-  //       };
-  //     case "write":
-  //       console.log('mm-test', 222)
-  //       return {
-  //         ...state,
-  //         type: action.articleType,
-  //         description: action.description,
-  //         content: action.markdonwValue
-  //       }
-  //     case "pushArticle":
-  //       // TODO: 发布文章
-  //       ;
-  //     default:
-  //       throw new Error();
-  //   }
-  // }
   const [state, dispatch] = useReducer(reducers, initialState);
   return (
     <>

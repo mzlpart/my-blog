@@ -1,7 +1,7 @@
 /*
  * @Author: mzl
  * @Date: 2020-11-24 23:23:34
- * @LastEditTime: 2020-12-28 15:36:50
+ * @LastEditTime: 2021-02-01 10:35:44
  * @Description: 跳转到写文章页面&&发布文章
  */
 import { useState, useEffect, useContext, useRef } from "react";
@@ -14,7 +14,8 @@ import { CacheConfig } from '../../utils';
 const Write = ( { router }) => {
    let { pathname } = router;
    let { state, dispatch } = useContext(UserContext);
-   let { isOnline, username, type, content, description } = state;
+   let { userReducer, articleReducer } = state;
+   let { isOnline, username, type, content } = userReducer;
    // 编辑文章
    const writeArticle = () => {
       let userInfo = CacheConfig.getCache('userInfo');
@@ -31,7 +32,7 @@ const Write = ( { router }) => {
    }
    // 发布文章
    const pushArticle = () => {
-      let postData = { type, content, description, username };
+      let postData = { type, content, username };
       console.log('mm-postData', postData)
    }
 
