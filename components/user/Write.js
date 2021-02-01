@@ -1,7 +1,7 @@
 /*
  * @Author: mzl
  * @Date: 2020-11-24 23:23:34
- * @LastEditTime: 2021-02-01 14:08:33
+ * @LastEditTime: 2021-02-01 16:21:55
  * @Description: 跳转到写文章页面&&发布文章
  */
 import { useState, useEffect, useContext, useRef, Fragment } from "react";
@@ -9,13 +9,13 @@ import IfComp from "if-comp";
 import { withRouter } from 'next/router';
 import { Button, message, Modal, Input } from "antd";
 import { UserContext } from '../../pages/_app';
-import { CacheConfig } from '../../utils';
+import { postAxios, CacheConfig } from '../../utils';
 
 const { TextArea } = Input;
 
 const Write = ({ router }) => {
    let { pathname } = router;
-   const [descrition, setDescrition] = useState(''); // 文章简介
+   const [description, setDescription] = useState(''); // 文章简介
    const [modal, setModal] = useState(false);
    let { state, dispatch } = useContext(UserContext);
    let { userReducer, articleReducer } = state;
@@ -42,13 +42,16 @@ const Write = ({ router }) => {
    // 发布文章
    function pushArticle() {
       setModal(false);
-      let postData = { type, content, username, descrition };
-      postAxios({url: "/article/add", postData})
+      let data = { type, content, username, description };
+      postAxios({url: "/article/add", data})
       .then(res => {
-         
+         let {status, msg} = res;
+         if(status === 200) {
+            message.success(msg);
+         }
       })
       .catch(error => {
-
+         message.success(error.msg);
       });
    }
 
@@ -85,9 +88,9 @@ const Write = ({ router }) => {
             okText="确认"
          >
             <TextArea
-               value={descrition}
+               value={description}
                showCount
-               onChange={e => setDescrition(e.target.value)}
+               onChange={e => setDescription(e.target.value)}
                rows={4} />
          </Modal>
       </Fragment>
