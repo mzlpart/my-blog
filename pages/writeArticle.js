@@ -1,7 +1,7 @@
 /*
  * @Author: mzl
  * @Date: 2020-12-07 08:57:34
- * @LastEditTime: 2020-12-28 15:40:07
+ * @LastEditTime: 2021-02-01 10:02:04
  * @Description: https://github.com/kkfor/for-editor
  */
 import { useState, useEffect, useContext, useRef, useCallback } from "react";
@@ -48,7 +48,7 @@ const WirteActicle = (props) => {
 
   const save = (params) => {
     setCacheArticle();
-    message.success('本地保存成功！');
+    message.success('缓存成功!');
   }
 
   // 设置文章缓存

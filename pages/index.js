@@ -1,8 +1,8 @@
 /*
  * @Author: your name
  * @Date: 2020-11-22 01:48:02
- * @LastEditTime: 2020-11-24 23:30:44
- * @LastEditors: Please set LastEditors
+ * @LastEditTime: 2021-02-01 09:57:50
+ * @LastEditors: mzl
  * @Description: In User Settings Edit
  * @FilePath: \my-blog\pages\index.js
  */
@@ -10,9 +10,11 @@ import { Layout, Menu, Row, Col, Card, Avatar } from 'antd';
 import {
   UserOutlined,
 } from '@ant-design/icons';
-import ArticleCard from '../components/article/Card';
+import dynamic from "next/dynamic";
 import { useGetCategories } from '../utils/common.effects';
 
+// 改成动态获取，解决直接导入带来的样式未生效问题
+const ArticleCard = dynamic(import("../components/article/Card"), { ssr: false });
 const { Content, Sider } = Layout;
 
 export default function Home() {
