@@ -1,7 +1,7 @@
 /*
  * @Author: your name
  * @Date: 2020-11-22 01:48:02
- * @LastEditTime: 2021-02-02 10:48:58
+ * @LastEditTime: 2021-02-02 14:04:50
  * @LastEditors: mzl
  * @Description: In User Settings Edit
  * @FilePath: \my-blog\pages\index.js
@@ -24,10 +24,28 @@ export default function Home() {
   let categories = useGetCategories(); // 获取文章类别
   const [articles, setArticles] = useState([]);
 
+  let reactArticles = [];
+  let vueArticles = [];
+
   useEffect(async () => {
     let data = await getArticle();
-    setArticles(data.list);
+    reactArticles = data.list.filter((item) => item.type === 'React');
+    vueArticles = data.list.filter((item) => item.type === 'Vue');
+    setArticles(reactArticles); // 默认React
   }, []);
+
+  const handleMenu = (item) => {
+    switch (item.name) {
+      case 'React':
+        setArticles(reactArticles);
+        break;
+      case 'Vue':
+        setArticles(vueArticles);
+        break;
+      default:
+        break;
+    }
+  }
 
   return (
     <Layout style={{ marginTop: 60, width: '100%', background: 'rgba(0,0,0,0)' }}>
@@ -39,9 +57,12 @@ export default function Home() {
           left: 0,
         }}
       >
-        <Menu theme="dark" mode="inline" defaultSelectedKeys={['Js']}>
+        <Menu theme="dark" mode="inline" defaultSelectedKeys={['React']}>
           {categories && categories.map((item) => (
-            <Menu.Item key={item.name} icon={<UserOutlined />}>
+            <Menu.Item
+              onClick={() => handleMenu(item)}
+              key={item.name}
+              icon={<UserOutlined />}>
               {item.name}
             </Menu.Item>
           ))}
@@ -50,7 +71,7 @@ export default function Home() {
       <Content style={{ marginTop: 10, marginLeft: 240, marginRight: 10, overflow: 'initial' }}>
         <Row>
           <Col span={18}>
-            {articles.map((item,index) => (
+            {articles.map((item, index) => (
               <ArticleCard
                 key={item._id}
                 type={item.type}
