@@ -1,7 +1,7 @@
 /*
  * @Author: mzl
  * @Date: 2020-11-23 21:15:45
- * @LastEditTime: 2020-12-06 16:52:58
+ * @LastEditTime: 2021-02-02 10:02:21
  * @Description: 工具类
  */
 
@@ -103,3 +103,9 @@ export function combineReducers(reducers) {
          return newState;//最后返回新的总state对象
     }
 }
+
+
+export async function getArticle() {
+    let data = await getAxios({ url: '/article/list' });
+    return data;
+  }

@@ -1,7 +1,7 @@
 /*
  * @Author: mzl
  * @Date: 2020-11-24 23:23:34
- * @LastEditTime: 2021-02-01 16:21:55
+ * @LastEditTime: 2021-02-02 10:42:47
  * @Description: 跳转到写文章页面&&发布文章
  */
 import { useState, useEffect, useContext, useRef, Fragment } from "react";
@@ -15,6 +15,7 @@ const { TextArea } = Input;
 
 const Write = ({ router }) => {
    let { pathname } = router;
+   const [title, setTitle] = useState(''); // 文章title
    const [description, setDescription] = useState(''); // 文章简介
    const [modal, setModal] = useState(false);
    let { state, dispatch } = useContext(UserContext);
@@ -41,18 +42,22 @@ const Write = ({ router }) => {
 
    // 发布文章
    function pushArticle() {
-      setModal(false);
-      let data = { type, content, username, description };
-      postAxios({url: "/article/add", data})
-      .then(res => {
-         let {status, msg} = res;
-         if(status === 200) {
-            message.success(msg);
-         }
-      })
-      .catch(error => {
-         message.success(error.msg);
-      });
+      let data = { type, content, username, description, title };
+      if (title === '') {
+         message.warning('文章标题不能为空！');
+      } else {
+         setModal(false);
+         postAxios({ url: "/article/add", data })
+            .then(res => {
+               let { status, msg } = res;
+               if (status === 200) {
+                  message.success(msg);
+               }
+            })
+            .catch(error => {
+               message.success(error.msg);
+            });
+      }
    }
 
    function handleCancel() {
@@ -80,15 +85,20 @@ const Write = ({ router }) => {
             visible={modal}
             centered
             style={{ top: 20 }}
-            title="请写一下文章详情呀"
+            title="描述一下文章信息"
             onCancel={handleCancel}
             onOk={pushArticle}
             maskClosable={false}
             cancelText="取消"
             okText="确认"
          >
+            <Input
+               value={title}
+               onChange={e => setTitle(e.target.value)}
+               placeholder="文章名称" />
             <TextArea
                value={description}
+               placeholder="文章详情"
                showCount
                onChange={e => setDescription(e.target.value)}
                rows={4} />

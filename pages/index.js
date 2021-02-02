@@ -1,16 +1,18 @@
 /*
  * @Author: your name
  * @Date: 2020-11-22 01:48:02
- * @LastEditTime: 2021-02-01 09:57:50
+ * @LastEditTime: 2021-02-02 10:48:58
  * @LastEditors: mzl
  * @Description: In User Settings Edit
  * @FilePath: \my-blog\pages\index.js
  */
 import { Layout, Menu, Row, Col, Card, Avatar } from 'antd';
+import { useEffect, useState } from "react";
 import {
   UserOutlined,
 } from '@ant-design/icons';
 import dynamic from "next/dynamic";
+import { getArticle } from './../utils';
 import { useGetCategories } from '../utils/common.effects';
 
 // 改成动态获取，解决直接导入带来的样式未生效问题
@@ -20,6 +22,12 @@ const { Content, Sider } = Layout;
 export default function Home() {
 
   let categories = useGetCategories(); // 获取文章类别
+  const [articles, setArticles] = useState([]);
+
+  useEffect(async () => {
+    let data = await getArticle();
+    setArticles(data.list);
+  }, []);
 
   return (
     <Layout style={{ marginTop: 60, width: '100%', background: 'rgba(0,0,0,0)' }}>
@@ -42,18 +50,14 @@ export default function Home() {
       <Content style={{ marginTop: 10, marginLeft: 240, marginRight: 10, overflow: 'initial' }}>
         <Row>
           <Col span={18}>
-            <ArticleCard
-              title=""
-              time={1712319824} />
-            <ArticleCard
-              title=""
-              time={1712319824} />
-            <ArticleCard
-              title=""
-              time={1712319824} />
-            <ArticleCard
-              title=""
-              time={1712319824} />
+            {articles.map((item,index) => (
+              <ArticleCard
+                key={item._id}
+                type={item.type}
+                title={item.title}
+                description={item.description}
+                time={item.time} />
+            ))}
             <ArticleCard type="End" />
           </Col>
           <Col span={6}></Col>

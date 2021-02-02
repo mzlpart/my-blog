@@ -1,8 +1,8 @@
 /*
  * @Author: mzl
  * @Date: 2020-11-23 20:21:23
- * @LastEditTime: 2020-11-24 23:31:03
- * @LastEditors: Please set LastEditors
+ * @LastEditTime: 2021-02-02 10:52:33
+ * @LastEditors: mzl
  * @Description: In User Settings Edit
  * @FilePath: \blog\components\article\Card.js
  */
@@ -18,9 +18,9 @@ import {
 const { Meta } = Card;
 const liList = [1, 2, 3, 4, 5, 6, 7];
 
-const ArticleCard = ({ type, time }) => (
+const ArticleCard = ({ type, time, title, description }) => (
   <IfComp
-    expression={!!type}
+    expression={type === 'End'}
     trueComp={
       <div className="article-card article-end">
         <div className="article-card-time">
@@ -43,7 +43,7 @@ const ArticleCard = ({ type, time }) => (
     falseComp={
       <div className="article-card">
         <div className="article-card-time">
-          <p>{timeFormat(new Date().getTime())}</p>
+          <p>{timeFormat(time)}</p>
           <ul>
             {liList.map((item, index) => (
               <li key={index}></li>
@@ -55,11 +55,11 @@ const ArticleCard = ({ type, time }) => (
           className="article-card-main"
           cover={
             <div className="article-card-container">
-              <div className="article-card-container-title">文章标题</div>
-              <div className="article-card-container-count">
+              <div className="article-card-container-title">{title}</div>
+              {/* <div className="article-card-container-count">
                 <EyeOutlined className="card-count-icon" />
                 <Badge count={4} className="card-show-count" />
-              </div>
+              </div> */}
               <div className="article-content-popicon"></div>
             </div>
           }
@@ -68,8 +68,8 @@ const ArticleCard = ({ type, time }) => (
             avatar={
               <Avatar src="https://zos.alipayobjects.com/rmsportal/ODTLcjxAfvqbxHnVXCYX.png" />
             }
-            title="Card title"
-            description="是打发斯蒂芬时代峰峻胜多负少的基督教的基督教的基督教的是打发斯蒂芬时代峰峻胜多负少的基督教的基督教的基督教的是打发斯蒂芬时代峰峻胜多负少的基督教的基督教的基督教的是打发斯蒂芬时代峰峻胜多负少的基督教的基督教的基督教的"
+            // title={title}
+            description={description}
           />
         </Card>
       </div>

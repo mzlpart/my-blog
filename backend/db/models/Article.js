@@ -1,7 +1,7 @@
 /*
  * @Author: mzl
  * @Date: 2020-12-01 00:05:53
- * @LastEditTime: 2020-12-25 11:14:01
+ * @LastEditTime: 2021-02-01 17:19:39
  * @Description: 操作文章表
  */
 
@@ -18,8 +18,10 @@ let articleModel = {
     // doDel: (params) => {
     //     console.log('文章删除');
     // },
-    doFind: (params) => {
-        return User.findOne(params);
+    doFind: (params, callback) => {
+        Article.find({}, (error, articles) => {
+            callback(error, articles);
+        });
     },
     doUpdate: (params) => {
         console.log('文章更新');
