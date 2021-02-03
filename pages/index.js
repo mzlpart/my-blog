@@ -1,7 +1,7 @@
 /*
  * @Author: your name
  * @Date: 2020-11-22 01:48:02
- * @LastEditTime: 2021-02-03 10:30:39
+ * @LastEditTime: 2021-02-03 14:06:18
  * @LastEditors: mzl
  * @Description: In User Settings Edit
  * @FilePath: \my-blog\pages\index.js
@@ -11,15 +11,17 @@ import { useEffect, useState, useRef } from "react";
 import {
   UserOutlined,
 } from '@ant-design/icons';
+import { withRouter } from 'next/router';
 import dynamic from "next/dynamic";
-import { getArticle } from './../utils';
+import { getArticle, CacheConfig } from './../utils';
 import { useGetCategories } from '../utils/common.effects';
 
 // 改成动态获取，解决直接导入带来的样式未生效问题
 const ArticleCard = dynamic(import("../components/article/Card"), { ssr: false });
 const { Content, Sider } = Layout;
+const { getCache, setCache } = CacheConfig;
 
-export default function Home() {
+function Home({ router }) {
 
   let categories = useGetCategories(); // 获取文章类别
   const articlesRef = useRef(); // 文章列表数据
@@ -47,6 +49,11 @@ export default function Home() {
     }
   }
 
+  const toDetails = (item) => {
+    setCache('articleContent', item);
+    router.push('/article');
+  }
+  
   return (
     <Layout style={{ marginTop: 60, width: '100%', background: 'rgba(0,0,0,0)' }}>
       <Sider
@@ -73,6 +80,7 @@ export default function Home() {
           <Col span={18}>
             {articles.map((item, index) => (
               <ArticleCard
+                onClick={() => toDetails(item)}
                 key={item._id}
                 type={item.type}
                 title={item.title}
@@ -87,3 +95,5 @@ export default function Home() {
     </Layout>
   )
 }
+
+export default withRouter(Home);

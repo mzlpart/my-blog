@@ -1,7 +1,7 @@
 /*
  * @Author: mzl
  * @Date: 2020-11-23 20:21:23
- * @LastEditTime: 2021-02-02 10:52:33
+ * @LastEditTime: 2021-02-03 10:47:56
  * @LastEditors: mzl
  * @Description: In User Settings Edit
  * @FilePath: \blog\components\article\Card.js
@@ -18,7 +18,7 @@ import {
 const { Meta } = Card;
 const liList = [1, 2, 3, 4, 5, 6, 7];
 
-const ArticleCard = ({ type, time, title, description }) => (
+const ArticleCard = ({ type, time, title, description, onClick }) => (
   <IfComp
     expression={type === 'End'}
     trueComp={
@@ -41,7 +41,9 @@ const ArticleCard = ({ type, time, title, description }) => (
       </div>
     }
     falseComp={
-      <div className="article-card">
+      <div
+        onClick={onClick}
+        className="article-card">
         <div className="article-card-time">
           <p>{timeFormat(time)}</p>
           <ul>
