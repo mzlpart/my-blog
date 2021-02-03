@@ -1,13 +1,13 @@
 /*
  * @Author: your name
  * @Date: 2020-11-22 01:48:02
- * @LastEditTime: 2021-02-02 14:04:50
+ * @LastEditTime: 2021-02-03 10:30:39
  * @LastEditors: mzl
  * @Description: In User Settings Edit
  * @FilePath: \my-blog\pages\index.js
  */
 import { Layout, Menu, Row, Col, Card, Avatar } from 'antd';
-import { useEffect, useState } from "react";
+import { useEffect, useState, useRef } from "react";
 import {
   UserOutlined,
 } from '@ant-design/icons';
@@ -22,24 +22,24 @@ const { Content, Sider } = Layout;
 export default function Home() {
 
   let categories = useGetCategories(); // 获取文章类别
+  const articlesRef = useRef(); // 文章列表数据
   const [articles, setArticles] = useState([]);
-
-  let reactArticles = [];
-  let vueArticles = [];
 
   useEffect(async () => {
     let data = await getArticle();
-    reactArticles = data.list.filter((item) => item.type === 'React');
-    vueArticles = data.list.filter((item) => item.type === 'Vue');
-    setArticles(reactArticles); // 默认React
+    articlesRef.current = data.list;
+    let rArticles = data.list.filter((item) => item.type === 'React');
+    setArticles(rArticles); // 默认react
   }, []);
 
   const handleMenu = (item) => {
     switch (item.name) {
       case 'React':
+        let reactArticles = articlesRef.current.filter((item) => item.type === 'React');
         setArticles(reactArticles);
         break;
       case 'Vue':
+        let vueArticles = articlesRef.current.filter((item) => item.type === 'Vue');
         setArticles(vueArticles);
         break;
       default:
